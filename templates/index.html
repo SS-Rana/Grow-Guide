@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+{% block content %}
+
+<div class="hero-section">
+    <h1>Smarter Farming, Better Yields</h1>
+    <p>Leverage the power of data to make informed decisions. Get an instant, data-driven recommendation for the best crop to plant based on your soil and environmental conditions.</p>
+    <a href="{{ url_for('predict') }}" class="cta-button">Get Started</a>
+</div>
+
+
+<section class="features-section">
+    <h2>Why Choose CropGuide?</h2>
+    <div class="features-container">
+        <div class="feature-card">
+            <i class="fas fa-bolt"></i>
+            <h3>Instant Predictions</h3>
+            <p>No more waiting. Our optimized model provides crop recommendations in seconds.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-brain"></i>
+            <h3>Data-Driven Insights</h3>
+            <p>Leverage a model trained on over 2200 data points for scientifically-backed advice.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-leaf"></i>
+            <h3>Wide Crop Database</h3>
+            <p>Get recommendations from a diverse database covering 22 different crops.</p>
+        </div>
+    </div>
+</section>
+
+<div class="homepage-about">
+    <h2>Technology You Can Trust</h2>
+    <p class="tagline">Our recommendations aren't guesswork. They're the product of a robust machine learning model trained on a comprehensive agricultural dataset to provide you with reliable, data-driven insights for your farm.</p>
+    <a href="{{ url_for('about') }}" class="learn-more-button">Learn More About Our Model</a>
+</div>
+
+
+{% endblock %}

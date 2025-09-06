@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+   <title> {% block title %} {% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+</head>
+
+<body>
+  <nav>
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbtn">
+      <i class="fas fa-bars"></i>
+    </label>
+    <label class="logo">GrowGuide 🌱</label>
+    <ul>
+      <li><a href="{{ url_for('home') }}" 
+             {% if active_page == 'home' %}class="active"{% endif %}>Home</a></li>
+      <li><a href="{{ url_for('predict') }}" 
+             {% if active_page == 'predict' %}class="active"{% endif %}>Predict</a></li>
+      <li><a href="{{ url_for('analysis') }}" 
+             {% if active_page == 'analysis' %}class="active"{% endif %}>Analysis</a></li>
+      <li><a href="{{ url_for('about') }}" 
+             {% if active_page == 'about' %}class="active"{% endif %}>About</a></li>
+
+    </ul>
+  </nav>
+
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <footer>
+    <div class="footer-content">
+        <h3>GrowGuide</h3>
+        <p>Providing data-driven agricultural insights to help you grow smarter. Your partner in modern farming.</p>
+        <ul class="socials">
+            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+            <li><a href="#"><i class="fab fa-github"></i></a></li>
+        </ul>
+    </div>
+    <div class="footer-bottom">
+        <!-- Corrected copyright notice -->
+        <p>copyright &copy;2025 GrowGuide. designed by <span>YourName</span></p>
+    </div>
+  </footer>
+
+  {% block scripts %}
+  {% endblock %}
+
+</body>
+</html>

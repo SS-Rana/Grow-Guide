@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %} Analysis {% endblock %}
+{% block content %}
+<div class="analysis-container">
+    <h1>Reverse Crop Analysis</h1>
+    <p class="description">Select a crop to see how your most recent soil data compares to its ideal growing conditions.</p>
+
+    {% if not last_input %}
+        <div class="alert-box">
+            <p>You haven't made a prediction yet. Please go to the <a href="{{ url_for('predict') }}">Predict</a> page and enter your soil data first to enable this feature.</p>
+        </div>
+    {% else %}
+        <form method="post" action="{{ url_for('analysis') }}" class="analysis-form">
+            <div class="form-group">
+                <label for="crop-select">Choose a Crop to Analyze:</label>
+                <select name="crop_name" id="crop-select">
+                    <option value="" disabled {% if not selected_crop %}selected{% endif %}>-- Select a Crop to Compare --</option>
+                    {% for crop in all_crops %}
+                        {# This condition ensures the last predicted crop is not in the list #}
+                        {% if crop != last_prediction %}
+                            <option value="{{ crop }}" {% if crop == selected_crop %}selected{% endif %}>{{ crop.title() }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit">Analyze</button>
+        </form>
+    {% endif %}
+
+    {% if report %}
+    <div class="report-card">
+        <h2>Analysis for: <strong>{{ selected_crop.title() }}</strong></h2>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Your Soil Value</th>
+                    <th>Ideal Range</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in report %}
+                <tr>
+                    <td><strong>{{ item.feature }}</strong></td>
+                    <td>{{ item.user_value }}</td>
+                    <td>{{ item.ideal_range }}</td>
+                    <td><span class="status-badge {{ item.status.lower() }}">{{ item.status }}</span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+

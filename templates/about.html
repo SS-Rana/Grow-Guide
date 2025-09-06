@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title%} About {% endblock %}
+{% block content %}
+<!-- New Page Header Banner -->
+<div class="about-header">
+    <div class="header-overlay">
+        <h1>Our Mission & Technology</h1>
+        <p>The science and philosophy behind GrowGuide.</p>
+    </div>
+</div>
+
+<div class="about-container">
+    
+    <!-- Mission Card -->
+    <div class="info-card">
+        <p class="intro">GrowGuide is more than a tool; it's a commitment to a smarter, more accessible future for agriculture. Our mission is to empower farmers, gardeners, and agricultural enthusiasts—especially in regions like Bihar—with the data-driven insights needed to thrive in a changing world.</p>
+        <blockquote class="mission-quote">
+            "To bridge the gap between traditional farming wisdom and modern data science, making sustainable and profitable agriculture achievable for everyone."
+        </blockquote>
+    </div>
+
+    <!-- Prediction Engine Card -->
+    <div class="info-card">
+        <div class="card-title">
+            <i class="fas fa-brain"></i>
+            <h2>The Prediction Engine: Gaussian Naive Bayes</h2>
+        </div>
+        <p>The core of our recommendation engine is a <strong>Gaussian Naive Bayes (GaussianNB)</strong> classifier, chosen for its speed and reliability.</p>
+        
+        <h3>Why This Model?</h3>
+        <div class="details-grid">
+            <div class="detail-item">
+                <i class="fas fa-tachometer-alt"></i>
+                <div>
+                    <h4>Speed & Efficiency</h4>
+                    <p>It's computationally fast, perfect for providing instant web-based recommendations.</p>
+                </div>
+            </div>
+            <div class="detail-item">
+                <i class="fas fa-check-circle"></i>
+                <div>
+                    <h4>Proven Performance</h4>
+                    <p>It performs exceptionally well on datasets where features contribute independently to the outcome.</p>
+                </div>
+            </div>
+            <div class="detail-item">
+                <i class="fas fa-database"></i>
+                <div>
+                    <h4>Data Efficiency</h4>
+                    <p>It achieves high accuracy without needing a massive dataset, making it a robust choice.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3>The Role of Data Scaling</h3>
+        <p>Before prediction, your input is processed by a `MinMaxScaler`. This critical step scales each feature to a consistent range (0 to 1), ensuring that no single feature can disproportionately influence the model's prediction, leading to more accurate results.</p>
+    </div>
+
+    <!-- Chatbot & Dataset Card -->
+    <div class="info-card">
+        <div class="card-title">
+             <i class="fas fa-comments"></i>
+            <h2>AI Chatbot & Training Data</h2>
+        </div>
+        <p>The GrowGuide chatbot is powered by <strong>Google's Gemini API</strong>. It uses Google Search grounding to provide factual, up-to-date answers, preventing outdated information or AI "hallucinations." The prediction model itself was trained on a foundational dataset of <strong>2200 unique samples</strong> across <strong>22 different crops</strong>.</p>
+    </div>
+
+    <!-- Technology Stack Card -->
+    <div class="info-card">
+        <div class="card-title">
+            <i class="fas fa-cogs"></i>
+            <h2>Technology Stack</h2>
+        </div>
+        <div class="stack-grid">
+            <div class="stack-item">Python & Flask</div>
+            <div class="stack-item">Scikit-learn</div>
+            <div class="stack-item">Pandas & NumPy</div>
+            <div class="stack-item">Google Gemini API</div>
+            <div class="stack-item">HTML5 & CSS3</div>
+            <div class="stack-item">JavaScript</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
