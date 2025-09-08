@@ -53,8 +53,10 @@ def analysis():
 
     if request.method == 'POST':
         selected_crop = request.form.get('crop_name')
-    elif last_input:
-        selected_crop = last_prediction
+    elif last_input and all_crops:
+        selected_crop = all_crops[0] # Default to the first crop if last_input exists
+    elif not last_input and all_crops: # If no last_input, but we have crops, default to the first one
+        selected_crop = all_crops[0]
 
     if selected_crop and last_input:
         ideal_conditions = IDEAL_CROP_CONDITIONS.get(selected_crop)
