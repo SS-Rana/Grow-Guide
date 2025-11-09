@@ -33,6 +33,23 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem(`chatHistory_${cropName}`, JSON.stringify(messages));
     };
 
+    // --- NEW: Clear chat history for the current crop ---
+    const clearChatHistory = () => {
+        localStorage.removeItem(`chatHistory_${cropName}`);
+        chatBox.innerHTML = '<div class="chat-message bot">Welcome! Ask me anything about this crop.</div>';
+        saveChatHistory(); // Save the welcome message as the initial state
+    };
+
+    // Check if the current cropName is different from the last one saved in session/local storage
+    // If it's different, clear the history. This ensures a fresh start for each new prediction.
+    const lastCropName = localStorage.getItem('lastPredictedCrop');
+    if (lastCropName !== cropName) {
+        clearChatHistory();
+        localStorage.setItem('lastPredictedCrop', cropName);
+    } else {
+        loadChatHistory(); // Load history only if it's the same crop as before
+    }
+
     const sendMessage = async () => {
         const message = userInput.value.trim();
         if (message === "") return;
@@ -123,5 +140,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Load history as soon as the page is ready
-    loadChatHistory();
+    // loadChatHistory(); // This line is now handled by the new_code
 });

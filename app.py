@@ -53,10 +53,21 @@ def analysis():
 
     if request.method == 'POST':
         selected_crop = request.form.get('crop_name')
-    elif last_input and all_crops:
-        selected_crop = all_crops[0] # Default to the first crop if last_input exists
-    elif not last_input and all_crops: # If no last_input, but we have crops, default to the first one
-        selected_crop = all_crops[0]
+    elif last_input:
+        # If last_input exists, and we are on a GET request, try to set a default selected_crop.
+        # We prioritize a previously selected crop (if available from a POST request),
+        # then a non-predicted crop, then any crop from the list.
+        if all_crops:
+            # If a last_prediction exists, try to find a different crop from the list to display
+            if last_prediction and len(all_crops) > 1:
+                for crop in all_crops:
+                    if crop != last_prediction:
+                        selected_crop = crop
+                        break
+            # If no last_prediction, or only one crop (which might be the predicted one),
+            # default to the first available crop.
+            if not selected_crop:
+                selected_crop = all_crops[0]
 
     if selected_crop and last_input:
         ideal_conditions = IDEAL_CROP_CONDITIONS.get(selected_crop)
